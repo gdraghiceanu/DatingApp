@@ -34,22 +34,27 @@ namespace DatingApp.API
         {
             services.AddDbContext<DataContext>(w => w.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
             services.AddCors(options =>
-         {
-             options.AddPolicy(MyAllowSpecificOrigins,
-             builder =>
-             {
-                 builder.WithOrigins("*");
-             });
-         });
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins("*").WithMethods("*").WithHeaders("*");                    
+                });
+            });
+
+        //  services.AddCors(o => o.AddPolicy(MyAllowSpecificOrigins, builder =>
+        // {
+        //     builder.AllowAnyOrigin()
+        //            .AllowAnyMethod()
+        //            .AllowAnyHeader();
+        // }));
 
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(cfg =>
-            {               
-                // cfg.RequireHttpsMetadata = false;
-                // cfg.SaveToken = true;
-
+            {              
                 cfg.TokenValidationParameters = new TokenValidationParameters()
                 {
                     ValidateIssuerSigningKey = true,

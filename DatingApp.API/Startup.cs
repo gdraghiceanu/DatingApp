@@ -61,6 +61,7 @@ namespace DatingApp.API
             //            .AllowAnyHeader();
             // }));
 
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper();
             services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
@@ -107,7 +108,8 @@ namespace DatingApp.API
 
             // app.UseHttpsRedirection();
             // seeder.SeedUsers();
-            app.UseCors(MyAllowSpecificOrigins);
+            // app.UseCors(MyAllowSpecificOrigins);
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseAuthentication();
             app.UseMvc();
         }

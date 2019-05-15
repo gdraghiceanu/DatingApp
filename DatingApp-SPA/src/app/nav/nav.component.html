@@ -3,19 +3,22 @@
     <a class="navbar-brand" [routerLink]="['/home']">Dating App</a>
 
     <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
-      <li class="nav-item" routerLinkActive="active" >
-        <a class="nav-link" [routerLink]="['/members']" >Matches</a>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/members']">Matches</a>
       </li>
-      <li class="nav-item"  routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/lists']" >Lists</a>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/lists']">Lists</a>
       </li>
-      <li class="nav-item"  routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/messages']" >Messages</a>
-      </li>     
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/messages']">Messages</a>
+      </li>
     </ul>
 
-    <div *ngIf="loggedIn()" class="dropdown"  dropdown>
-      <a class="dropdown-toggle text-light" dropdownToggle>
+    <div *ngIf="loggedIn()" class="dropdown" dropdown>
+        <span class="mr-1">
+            <img src="{{photoUrl}}" />
+          </span>
+      <a class="dropdown-toggle text-light" dropdownToggle>        
         Welcome {{ authService.decodedToken?.unique_name | titlecase }}
       </a>
 
